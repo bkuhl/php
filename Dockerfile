@@ -29,7 +29,7 @@ RUN apk add --update --no-cache \
         pcntl \
 
         # needed for https://github.com/spatie/laravel-backup
-        zip
+        zip \
 
     # For parallel composer dependency installs
     && composer global require hirak/prestissimo \
@@ -39,7 +39,7 @@ RUN apk add --update --no-cache \
     && chown -R www-data:www-data /home/www-data/ /var/www/html \
 
     # Setup the crontab, only activated if the container's command is configured for cron
-    && echo "*       *       *       *       *       php /var/www/html/artisan schedule:run" > /etc/crontabs/www-data \
+    && echo "*       *       *       *       *       php /var/www/html/artisan schedule:run" > /etc/crontabs/www-data
 
 # Copy the application files to the container
 ADD . /var/www/html

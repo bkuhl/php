@@ -8,8 +8,8 @@ before_script:
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 script:
   - docker build -t "bkuhl/php:latest" .
-  - ~/official-images/test/run.sh "bkuhl/php:latest"
   - docker images
+  - ~/official-images/test/run.sh "bkuhl/php:latest"
 before_deploy:
   # Extract the version components out of a `v12.34.56` or `12.34.56` version string (only works if this is a
   - IFS=. read MAJOR MINOR PATCH <<< "${TRAVIS_TAG}"
