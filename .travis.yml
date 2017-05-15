@@ -4,9 +4,9 @@ install:
 before_script:
   - export TRAVIS_TAG = 'v12.34.56'
   # Extract the version components out of a `v12.34.56` or `12.34.56` version string
-  - export MAJOR_VERSION = `sed -i 's/[v?]((([\d]+)\.[\d]+)\.[\d]+)/$1/g' ${TRAVIS_TAG}`
-  - export MINOR_VERSION = `sed -i 's/[v?]((([\d]+)\.[\d]+)\.[\d]+)/$1.$2/g' ${TRAVIS_TAG}`
-  - export PATCH_VERSION = `sed -i 's/[v?]((([\d]+)\.[\d]+)\.[\d]+)/$1.$2.$./g' ${TRAVIS_TAG}`
+  - MAJOR_VERSION=`sed -i 's/[v?]((([\d]+)\.[\d]+)\.[\d]+)/$1/g' ${TRAVIS_TAG}`
+  - MINOR_VERSION=`sed -i 's/[v?]((([\d]+)\.[\d]+)\.[\d]+)/$1.$2/g' ${TRAVIS_TAG}`
+  - PATCH_VERSION=`sed -i 's/[v?]((([\d]+)\.[\d]+)\.[\d]+)/$1.$2.$./g' ${TRAVIS_TAG}`
   - echo $MAJOR_VERSION
   - echo $MINOR_VERSION
   - echo $PATCH_VERSION
