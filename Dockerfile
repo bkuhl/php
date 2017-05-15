@@ -43,6 +43,3 @@ RUN apk add --update --no-cache \
 
 # Copy the application files to the container
 ADD . /var/www/html
-
-# Make sure when users get into the container they aren't root
-USER www-data
