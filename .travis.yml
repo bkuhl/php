@@ -2,26 +2,20 @@ services: docker
 install:
   - git clone https://github.com/docker-library/official-images.git ~/official-images
 before_script:
-  - TRAVIS_TAG='v12.34.56'
-  - IFS=. read MAJOR_VERSION MINOR_VERSION PATCH_VERSION <<< "${TRAVIS_TAG#v}"
-  # Extract the version components out of a `v12.34.56` or `12.34.56` version string
-#  - echo ${TRAVIS_TAG/[v?]((([\d]+)\.[\d]+)\.[\d]+)/$1}
-#  - MAJOR_VERSION=`sed 's/[v?]((([\d]+)\.[\d]+)\.[\d]+)/$1/g' <<< ${TRAVIS_TAG}`
-#  - MINOR_VERSION=`sed 's/[v?]((([\d]+)\.[\d]+)\.[\d]+)/$1.$2/g' <<< ${TRAVIS_TAG}`
-#  - PATCH_VERSION=`sed 's/[v?]((([\d]+)\.[\d]+)\.[\d]+)/$1.$2.$./g' <<< ${TRAVIS_TAG}`
-  - echo $MAJOR_VERSION
-  - echo $MINOR_VERSION
-  - echo $PATCH_VERSION
-  - exit;
+  # Extract the version components out of a `v12.34.56` or `12.34.56` version string (only works if this is a
+  - IFS=. read MAJOR MINOR PATCH <<< "${TRAVIS_TAG}"
   - docker -v
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 script:
   - docker build -t "bkuhl/php:latest" .
   - ~/official-images/test/run.sh "bkuhl/php:latest"
   - docker images
+before_deploy:
+  # Extract the version components out of a `v12.34.56` or `12.34.56` version string (only works if this is a
+  - IFS=. read MAJOR MINOR PATCH <<< "${TRAVIS_TAG}"
 deploy:
   provider: script
-  script: docker push "bkuhl:latest" && docker tag "bkuhl:web" "bkuhl:${TRAVIS_TAG}" && docker push "bkuhl:${TRAVIS_TAG}" && docker tag "bkuhl:web" "bkuhl:latest" && docker push "bkuhl:latest"
+  script: docker push "bkuhl/php:latest" && docker tag "bkuhl/php:latest" "bkuhl:${MAJOR}" && docker push "bkuhl:${MAJOR}" && docker tag "bkuhl/php:latest" "bkuhl:${MAJOR}.${MINOR}" && docker push "bkuhl:${MAJOR}.${MINOR}" && docker tag "bkuhl/php:latest" "bkuhl:${MAJOR}.${MINOR}.${PATCH}" && docker push "bkuhl:${MAJOR}.${PATCH}"
   skip_cleanup: false
   on:
     tags: true
