@@ -17,7 +17,7 @@ This container is intended to run Laravel application's queues, cron, etc. and t
  * PHP extension [zip](http://php.net/manual/en/book.zip.php)
  * `mysql-client` for `mysqldump` support
  
-For running fpm/nginx, check out [bkuhl/fpm-nginx](https://github.com/bkuhl/fpm-nginx).
+For a container to run nginx/fpm for Laravel applications,  check out [bkuhl/fpm-nginx](https://github.com/bkuhl/fpm-nginx).
  
 # Crons, Queue Workers and Migrations
 
