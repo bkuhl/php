@@ -4,7 +4,6 @@ install:
 before_script:
   - docker -v
 script:
-  - TRAVIS_TAG=v7.1.5
   - docker build -t "bkuhl/php:latest" .
   - docker images
   - ~/official-images/test/run.sh "bkuhl/php:latest"
@@ -16,5 +15,5 @@ deploy:
   provider: script
   script: docker push "bkuhl/php:latest" && docker tag "bkuhl/php:latest" "bkuhl/php:${MAJOR}" && docker push "bkuhl/php:${MAJOR}" && docker tag "bkuhl/php:latest" "bkuhl/php:${MAJOR}.${MINOR}" && docker push "bkuhl/php:${MAJOR}.${MINOR}" && docker tag "bkuhl/php:latest" "bkuhl/php:${MAJOR}.${MINOR}.${PATCH}" && docker push "bkuhl/php:${MAJOR}.${MINOR}.${PATCH}"
   skip_cleanup: false
-#  on:
-#    tags: true
+  on:
+    tags: true
