@@ -1,0 +1,25 @@
+services: docker
+install:
+  - git clone https://github.com/docker-library/official-images.git ~/official-images
+before_script:
+  - export TRAVIS_TAG = 'v12.34.56'
+  # Extract the version components out of a `v12.34.56` or `12.34.56` version string
+  - export MAJOR_VERSION = `sed -i 's/[v?]((([\d]+)\.[\d]+)\.[\d]+)/$1/g' ${TRAVIS_TAG}`
+  - export MINOR_VERSION = `sed -i 's/[v?]((([\d]+)\.[\d]+)\.[\d]+)/$1.$2/g' ${TRAVIS_TAG}`
+  - export PATCH_VERSION = `sed -i 's/[v?]((([\d]+)\.[\d]+)\.[\d]+)/$1.$2.$./g' ${TRAVIS_TAG}`
+  - echo $MAJOR_VERSION
+  - echo $MINOR_VERSION
+  - echo $PATCH_VERSION
+  - exit;
+  - docker -v
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+script:
+  - docker build -t "bkuhl/php:latest" .
+  - ~/official-images/test/run.sh "bkuhl/php:latest"
+  - docker images
+deploy:
+  provider: script
+  script: docker push "bkuhl:latest" && docker tag "bkuhl:web" "bkuhl:${TRAVIS_TAG}" && docker push "bkuhl:${TRAVIS_TAG}" && docker tag "bkuhl:web" "bkuhl:latest" && docker push "bkuhl:latest"
+  skip_cleanup: false
+  on:
+    tags: true
