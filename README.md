@@ -1,8 +1,7 @@
 # PHP
 
-[![Docker Build](https://img.shields.io/docker/build/bkuhl/php.svg)](https://hub.docker.com/r/bkuhl/php)
+[![Build Status](https://travis-ci.org/bkuhl/php.svg?branch=master)](https://travis-ci.org/bkuhl/php)
 [![Docker Pulls](https://img.shields.io/docker/pulls/bkuhl/php.svg)](https://hub.docker.com/r/bkuhl/php)
-![Automated](https://img.shields.io/docker/automated/bkuhl/php.svg)
 
 This container is intended to run Laravel application's queues, cron, etc. and thus comes with a few items to assist:
 
