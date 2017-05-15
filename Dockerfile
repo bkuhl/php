@@ -6,9 +6,6 @@ WORKDIR /var/www/html
 
 ADD install_composer.php /var/www/html/install_composer.php
 
-# Copy the application files to the container
-ADD . /var/www/html
-
 RUN apk add --update --no-cache \
 
         # needed for composer
