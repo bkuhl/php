@@ -9,11 +9,11 @@ script:
   - ~/official-images/test/run.sh "bkuhl/php:latest"
 before_deploy:
   # Extract the version components out of a `v12.34.56` or `12.34.56` version string (only works if this is a
-  - IFS=. read MAJOR MINOR PATCH <<< "${TRAVIS_TAG}"
+  - IFS=. read MAJOR MINOR PATCH <<< "${TRAVIS_TAG#v}"
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 deploy:
   provider: script
   script: docker push "bkuhl/php:latest" && docker tag "bkuhl/php:latest" "bkuhl/php:${MAJOR}" && docker push "bkuhl/php:${MAJOR}" && docker tag "bkuhl/php:latest" "bkuhl/php:${MAJOR}.${MINOR}" && docker push "bkuhl/php:${MAJOR}.${MINOR}" && docker tag "bkuhl/php:latest" "bkuhl/php:${MAJOR}.${MINOR}.${PATCH}" && docker push "bkuhl/php:${MAJOR}.${MINOR}.${PATCH}"
   skip_cleanup: false
-  on:
-    tags: true
+#  on:
+#    tags: true
