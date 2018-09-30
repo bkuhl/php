@@ -20,7 +20,7 @@ RUN apk add --update --no-cache \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
 
     # Installing composer
-    && bash /var/www/html/install_composer.sh \
+    && sh /var/www/html/install_composer.sh \
 
     # Installing common Laravel dependencies
     && docker-php-ext-install mbstring pdo_mysql gd \
