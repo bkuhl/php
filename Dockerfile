@@ -4,7 +4,7 @@ FROM php:7.2.10-alpine3.7
 
 WORKDIR /var/www/html
 
-ADD install_composer.sh /var/www/html/install_composer.sh
+ADD install_composer.php /var/www/html/install_composer.php
 
 RUN apk add --update --no-cache \
 
@@ -20,7 +20,7 @@ RUN apk add --update --no-cache \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
 
     # Installing composer
-    && sh /var/www/html/install_composer.sh \
+    && php /var/www/html/install_composer.php \
 
     # Installing common Laravel dependencies
     && docker-php-ext-install mbstring pdo_mysql gd \
