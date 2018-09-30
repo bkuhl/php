@@ -1,10 +1,10 @@
 # This container should be used for any/all CLI processes
 # including cron, queues, etc.
-FROM php:7.2.4-alpine3.7
+FROM php:7.2.10-alpine3.7
 
 WORKDIR /var/www/html
 
-ADD install_composer.php /var/www/html/install_composer.php
+ADD install_composer.sh /var/www/html/install_composer.sh
 
 RUN apk add --update --no-cache \
 
@@ -20,7 +20,7 @@ RUN apk add --update --no-cache \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
 
     # Installing composer
-    && php /var/www/html/install_composer.php \
+    && /var/www/html/install_composer.sh \
 
     # Installing common Laravel dependencies
     && docker-php-ext-install mbstring pdo_mysql gd \
