@@ -7,7 +7,7 @@ WORKDIR /var/www/html
 ADD install_composer.php /var/www/html/install_composer.php
 
 RUN apk add --update --no-cache \
-        oniguruma
+        oniguruma \
         # needed for composer
         git zip unzip \
         # needed for spatie/laravel-backup
