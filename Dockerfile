@@ -7,6 +7,8 @@ WORKDIR /var/www/html
 ADD install_composer.php /var/www/html/install_composer.php
 
 RUN apk add --update --no-cache \
+        # Needed for mbstring as of php 7.4
+        oniguruma \
         # needed for composer
         libzip-dev git zip unzip \
         # needed for spatie/laravel-backup
