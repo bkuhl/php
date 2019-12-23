@@ -1,12 +1,16 @@
 # This container should be used for any/all CLI processes
 # including cron, queues, etc.
-FROM php:7.3.5-fpm-alpine3.8
+FROM php:7.4.1-fpm-alpine3.10
 
 WORKDIR /var/www/html
 
 ADD install_composer.php /var/www/html/install_composer.php
 
 RUN apk add --update --no-cache \
+        # see https://github.com/docker-library/php/issues/880
+        oniguruma-dev \
+        # needed for php
+        libzip-dev \
         # needed for composer
         libzip-dev git zip unzip \
         # needed for spatie/laravel-backup
