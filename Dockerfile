@@ -15,6 +15,8 @@ RUN apk add --update --no-cache \
         mysql-client \
         # needed for gd
         libpng-dev libjpeg-turbo-dev \
+        # needed for php
+        libzip
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     # Installing composer
     && php /var/www/html/install_composer.php \
