@@ -12,11 +12,13 @@ RUN apk add --update --no-cache \
         # needed for php
         libzip-dev \
         # needed for composer
-        git zip unzip \
+        libzip-dev git zip unzip \
         # needed for spatie/laravel-backup
         mysql-client \
         # needed for gd
         libpng-dev libjpeg-turbo-dev \
+        # needed for Laravel horizon - https://github.com/laravel/horizon/issues/597#issuecomment-495198884
+        procps \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     # Installing composer
     && php /var/www/html/install_composer.php \
