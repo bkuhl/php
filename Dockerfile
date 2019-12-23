@@ -9,14 +9,14 @@ ADD install_composer.php /var/www/html/install_composer.php
 RUN apk add --update --no-cache \
         # see https://github.com/docker-library/php/issues/880
         oniguruma-dev \
+        # needed for php
+        libzip-dev \
         # needed for composer
         git zip unzip \
         # needed for spatie/laravel-backup
         mysql-client \
         # needed for gd
         libpng-dev libjpeg-turbo-dev \
-        # needed for php
-        libzip \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     # Installing composer
     && php /var/www/html/install_composer.php \
