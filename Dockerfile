@@ -9,8 +9,6 @@ ADD install_composer.php /var/www/html/install_composer.php
 RUN apk add --update --no-cache \
         # see https://github.com/docker-library/php/issues/880
         oniguruma-dev \
-        # needed for php
-        libzip-dev \
         # needed for composer
         libzip-dev git zip unzip \
         # needed for spatie/laravel-backup
