@@ -23,12 +23,12 @@ For a container to run nginx/fpm for Laravel applications,  check out [bkuhl/fpm
 Overwrite the container's default command to perform various Laravel tasks.
 
  * Cron container: use command `crond -f -d 8`
- * Queue worker container: use command `php /var/www/html/artisan queue:listen --sleep=3 --tries=3 --timeout=0`
+ * Queue worker container: use command `php /var/www/html/artisan queue:work --sleep=3 --tries=3 --timeout=0`
  * Migrations container: use command `php /var/www/html/artisan migrate --force`
 ## Example Dockerfile
 
 ```
-FROM bkuhl/php:7.1
+FROM bkuhl/php:7.4
 
 WORKDIR /var/www/html
 
