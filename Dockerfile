@@ -1,6 +1,6 @@
 # This container should be used for any/all CLI processes
 # including cron, queues, etc.
-FROM php:7.4.2-fpm-alpine3.11
+FROM php:7.4.11-fpm-alpine3.11
 
 WORKDIR /var/www/html
 
@@ -26,8 +26,6 @@ RUN apk add --update --no-cache \
         pcntl \
         # needed for https://github.com/spatie/laravel-backup
         zip \
-    # For parallel composer dependency installs
-    && composer global require hirak/prestissimo \
     && mkdir -p /home/www-data/.composer/cache \
     && chown -R www-data:www-data /home/www-data/ /var/www/html \
     # Setup the crontab, only activated if the container's command is configured for cron
