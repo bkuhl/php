@@ -9,8 +9,6 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
-    env:
-      REGISTRY: bkuhl/php
     steps:
       -
         name: Checkout
@@ -40,4 +38,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
 #          push: true
-          tags: $REGISTRY:latest,$REGISTRY:${{ steps.semver_parser.outputs.major }},$REGISTRY:${{ steps.semver_parser.outputs.major }}.${{ steps.semver_parser.outputs.minor }},$REGISTRY:${{ steps.semver_parser.outputs.major }}.${{ steps.semver_parser.outputs.minor }}.${{ steps.semver_parser.outputs.patch }}
+          tags: bkuhl/php:latest,bkuhl/php:${{ steps.semver_parser.outputs.major }},bkuhl/php:${{ steps.semver_parser.outputs.major }}.${{ steps.semver_parser.outputs.minor }},bkuhl/php:${{ steps.semver_parser.outputs.major }}.${{ steps.semver_parser.outputs.minor }}.${{ steps.semver_parser.outputs.patch }}
