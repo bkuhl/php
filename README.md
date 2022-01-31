@@ -28,7 +28,7 @@ Overwrite the container's default command to perform various Laravel tasks.
 ## Example Dockerfile
 
 ```
-FROM bkuhl/php:7.4
+FROM bkuhl/php:8.0
 
 WORKDIR /var/www/html
 
@@ -37,9 +37,6 @@ ADD --chown=www-data:www-data  . /var/www/html
 
 USER www-data
 
-    # production-ready dependencies
-RUN composer install  --no-interaction --optimize-autoloader --no-dev --prefer-dist \
-
-    # keep the container light weight
-    && rm -rf /home/www-data/.composer/cache
+# production-ready dependencies
+RUN composer install --no-interaction --optimize-autoloader --no-dev --no-cache --prefer-dist
 ```
