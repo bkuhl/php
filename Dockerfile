@@ -1,6 +1,6 @@
 # This container should be used for any/all CLI processes
 # including cron, queues, etc.
-FROM FROM php:7.4.27-alpine3.15
+FROM php:7.4.27-alpine3.15
 
 WORKDIR /var/www/html
 
