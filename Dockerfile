@@ -30,11 +30,3 @@ RUN apk add --update --no-cache \
     && chown -R www-data:www-data /home/www-data/ /var/www/html \
     # Setup the crontab, only activated if the container's command is configured for cron
     && echo "*       *       *       *       *       php /var/www/html/artisan schedule:run" > /etc/crontabs/www-data
-
-RUN apk add --update --no-cache make g++ cairo-dev libpng-dev zlib-dev libzip-dev \
-    #&& docker-php-ext-configure zip --with-libzip \
-    # Using Laravel Horizon requires this extension to be installed
-    # We really only need it on the cli container, but composer fails
-    # if we don't include it here as well
-    # zip is the same way with Laravel Dusk
-    && docker-php-ext-install pcntl zip
