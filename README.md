@@ -27,7 +27,7 @@ Overwrite the container's default command to perform various Laravel tasks.
 ## Example Dockerfile
 
 ```
-FROM bkuhl/php:8.1
+FROM bkuhl/php:8
 
 WORKDIR /var/www/html
 
