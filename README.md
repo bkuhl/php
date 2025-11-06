@@ -2,7 +2,7 @@
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/bkuhl/php.svg)](https://hub.docker.com/r/bkuhl/php)
 
-[!IMPORTANT] This project has been deprecated, we recommend using https://serversideup.net images instead.
+> [!IMPORTANT] This project has been deprecated, we recommend using https://serversideup.net images instead.
 
 This container is intended to run Laravel application's queues, cron, etc. and thus comes with a few items to assist:
 
